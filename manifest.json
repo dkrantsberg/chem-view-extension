@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "ChemView",
+  "version": "1.0",
+  "description": "Render chemical structures from selected SMILES strings",
+  "permissions": ["contextMenus", "activeTab"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "RDKit_minimal.js",   
+        "content.js"          
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "RDKit_minimal.wasm"    
+  ],
+  "icons": {                
+    "128": "icon128.png"
+  },
+  "content_security_policy":
+    "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
